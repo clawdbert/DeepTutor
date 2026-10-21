@@ -1,0 +1,14 @@
+[Unit]
+Description=DeepTutor pod: host 127.0.0.1:8340 -> :3782; the pod can reach host 127.0.0.1:8317 only (pasta -T 8317); tailscale serve --https=8341 fronts 8340
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStartPre=-/usr/bin/podman pod rm -f deeptutor
+ExecStart=/usr/bin/podman pod create --name deeptutor --network pasta:-T,8317 -p 127.0.0.1:8340:3782
+ExecStop=/usr/bin/podman pod rm -f deeptutor
+
+[Install]
+WantedBy=default.target
