@@ -10,7 +10,6 @@ RestartSec=5
 TimeoutStopSec=70
 ExecStart=/usr/bin/podman run --rm --replace --pull=never \
   --pod deeptutor --name deeptutor-app \
-  --userns=keep-id \
   --read-only \
   --security-opt no-new-privileges \
   --pids-limit 1024 --memory 4g --cpus 4 \
@@ -21,7 +20,6 @@ ExecStart=/usr/bin/podman run --rm --replace --pull=never \
   -v /home/deploy/projects/deeptutor/data/user/workspace:/workspace:U \
   -e DEEPTUTOR_WORKSPACE_ROOT=/workspace \
   -e DEEPTUTOR_WORKSPACE_ALLOWED_ROOTS=/workspace \
-  -e DEEPTUTOR_SANDBOX_ALLOW_SUBPROCESS=0 \
   ghcr.io/hkuds/deeptutor@sha256:602d5dfbac7430e364069ac6672642cb0d764e046d189bf596d9ddc6b775c535
 ExecStop=/usr/bin/podman stop --ignore -t 10 deeptutor-app
 

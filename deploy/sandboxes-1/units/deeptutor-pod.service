@@ -7,7 +7,7 @@ After=network-online.target
 Type=oneshot
 RemainAfterExit=yes
 ExecStartPre=-/usr/bin/podman pod rm -f deeptutor
-ExecStart=/usr/bin/podman pod create --name deeptutor --network pasta:-T,8317 -p 127.0.0.1:8340:3782
+ExecStart=/usr/bin/podman pod create --name deeptutor --userns=keep-id --network pasta:-T,8317 -p 127.0.0.1:8340:3782
 ExecStop=/usr/bin/podman pod rm -f deeptutor
 
 [Install]
