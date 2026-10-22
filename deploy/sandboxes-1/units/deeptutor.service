@@ -20,7 +20,7 @@ ExecStart=/usr/bin/podman run --rm --replace --pull=never \
   -v /home/deploy/projects/deeptutor/data/user/workspace:/workspace:U \
   -e DEEPTUTOR_WORKSPACE_ROOT=/workspace \
   -e DEEPTUTOR_WORKSPACE_ALLOWED_ROOTS=/workspace \
-  ghcr.io/hkuds/deeptutor@sha256:602d5dfbac7430e364069ac6672642cb0d764e046d189bf596d9ddc6b775c535
+  localhost/deeptutor:v1.6.15-node22.23.4
 ExecStop=/usr/bin/podman stop --ignore -t 10 deeptutor-app
 
 [Install]

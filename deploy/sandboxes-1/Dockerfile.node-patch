@@ -1,0 +1,6 @@
+# The upstream image with the patched Node.js of the October 2026 security release (22.23.4).
+# Upstream v1.6.15 ships 22.23.3; this swaps only the node binary and its bundled npm/corepack.
+#   podman build -f deploy/sandboxes-1/Dockerfile.node-patch -t localhost/deeptutor:v1.6.15-node22.23.4 .
+FROM ghcr.io/hkuds/deeptutor@sha256:602d5dfbac7430e364069ac6672642cb0d764e046d189bf596d9ddc6b775c535
+COPY --from=docker.io/library/node:22.23.4-slim /usr/local/bin/node /usr/local/bin/node
+COPY --from=docker.io/library/node:22.23.4-slim /usr/local/lib/node_modules /usr/local/lib/node_modules
